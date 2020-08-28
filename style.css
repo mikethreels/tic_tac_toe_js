@@ -1,0 +1,16 @@
+main {
+  display: flex;
+  justify-content: center;
+}
+.game_section {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 50vw;
+  height: 50vh;
+}
+
+.game_section div {
+  text-align: center;
+  line-height: 100%;
+  
+}
