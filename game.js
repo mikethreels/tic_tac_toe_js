@@ -28,15 +28,28 @@ const gameLogic = (() => {
     [0, 4, 8],
     [2, 4, 6]];
 
-  const winner = (player) => {
+  const reset = () => {
     
+  };
+
+  const winner = (player) => {
+    const message = document.getElementById('message');
+    const messageText = document.createElement('p');
+    messageText.innerHTML = `Congratulation ${player.getName()} you win
+    would you like to play again?`;
+    const buttonDiv = document.createElement('div');
+    buttonDiv.innerHTML = `<button onclick="reset()" id="reset_button">Play again!</button>`;
+    message.append(messageText);
+    message.append(buttonDiv);
+    message.attributes.class.value = 'block';
+    // eslint-disable-next-line no-undef
+    game.attributes.class.value = 'none';
   };
 
   const winCheck = () => {
     if (winningMoves.some((win) => win.every((r) => currentPlayer.comb.includes(r)))) {
       winner(currentPlayer);
     }
-
   };
 
   function render() {
@@ -44,13 +57,13 @@ const gameLogic = (() => {
     while (game.firstChild) {
       game.removeChild(game.firstChild);
     }
-    console.log(player1.getName());
 
     const boardArr = gameBoard.board;
     boardArr.forEach(space => {
       const boardSpace = document.createElement('a');
       const boardSpaceText = document.createElement('p');
       boardSpaceText.innerHTML = space;
+      // eslint-disable-next-line func-names
       boardSpace.onclick = function () {
         gameBoard.board[space - 1] = currentPlayer.getSymbol();
         boardSpaceText.innerHTML = currentPlayer.getSymbol();
@@ -66,7 +79,6 @@ const gameLogic = (() => {
 
   // eslint-disable-next-line no-unused-vars
   const switchForm = () => {
-    console.log('switchFOrm');
     const newPlayerForm = document.getElementById('newPlayerForm');
     if (newPlayerForm.attributes.class.value === 'block') {
       newPlayerForm.attributes.class.value = 'none';
@@ -80,7 +92,6 @@ const gameLogic = (() => {
   function gameInit(e) {
   // prevent the submit button from sending the form
     e.preventDefault();
-    console.log('gameinit');
     const tempplayer1 = document.getElementById('newPlayer1').value;
     const tempplayer2 = document.getElementById('newPlayer2').value;
     player1 = Player(tempplayer1, 'X');
