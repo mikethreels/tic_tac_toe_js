@@ -1,16 +1,71 @@
+body {
+  background-color: #009ee2;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+header {
+  color: white;
+  height: 10vh;
+}
+
+h1 {
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+  margin: 5px;
+}
+
 main {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
+
+.player_select {
+  margin: 10px;
+}
+
+input {
+  display: block;
+  margin: 5px 0;
+  width: 200px;
+  height: 30px;
+  border-radius: 10px;
+}
+
+.shape {
+  display: flex;
+  margin: 10px 0;
+}
+
+.shape input {
+  height: 15px;
+  width: 15px;
+  margin: 0 15px 0 0;
+}
+
 .game_section {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  width: 50vw;
-  height: 50vh;
+  width: 60vh;
+  height: 60vh;
+  gap: 10px;
 }
 
-.game_section div {
-  text-align: center;
-  line-height: 100%;
-  
+.game_section a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 3px 2px 3px #808080;
+}
+
+.game_section a:hover {
+  cursor: pointer;
+  box-shadow: 0 0 0 white;
+}
+
+.none {
+  display: none;
 }

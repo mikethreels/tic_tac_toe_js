@@ -15,7 +15,14 @@
       </nav>
     </header>
     <main>
-      <section id="game" class="game_section">
+      <section id="player" class="player_select">
+        <form id="newPlayerForm" class="block">
+          <input type="text" name="player1" id="newPlayer1" placeholder="Enter your name player 1 (X)" required>
+          <input type="text" name="player2" id="newPlayer2" placeholder="Enter your name player 2 (O)" required>
+          <input onclick="switchForm()" class="submit_button" type="submit" value="Submit">
+        </form>
+      </section>
+      <section id="game" class="none">
 
       </section>
     </main>
@@ -23,7 +30,7 @@
 
     </footer>
 
-    <script src="script.js"></script>
+    <script src="game.js"></script>
     
   </body>
 </html>
