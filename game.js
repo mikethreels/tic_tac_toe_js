@@ -35,22 +35,26 @@ function render(players = []) {
 
 // eslint-disable-next-line no-unused-vars
 const switchForm = () => {
+  console.log('switchFOrm');
   const newPlayerForm = document.getElementById('newPlayerForm');
-  if (newPlayerForm.attributes.class.value === 'none') {
-    newPlayerForm.attributes.class.value = 'block';
-  } else {
+  if (newPlayerForm.attributes.class.value === 'block') {
     newPlayerForm.attributes.class.value = 'none';
+    // eslint-disable-next-line no-undef
     game.attributes.class.value = 'game_section';
+  } else {
+    newPlayerForm.attributes.class.value = 'block';
   }
 };
 
 function gameInit(e) {
   // prevent the submit button from sending the form
   e.preventDefault();
+  console.log('gameinit');
   const tempplayer1 = document.getElementById('newPlayer1').value;
   const tempplayer2 = document.getElementById('newPlayer2').value;
   const players = [Player(tempplayer1, 'X')];
   players.push(Player(tempplayer2, 'O'));
+  switchForm();
   render(players);
 }
 
