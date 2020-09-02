@@ -1,57 +1,37 @@
-# Project Name
+# Tic-Tac-Toe
 
-> One paragraph statement about the project.
+> This is a tic-tac-toe game to get familiar with Javascript
 
 ![screenshot](./app_screenshot.png)
 
-Additional description about the project and its features.
+In this application you can play a game of tic-tac-toe against your friends or foe's.
 
 ## Built With
 
-- Major languages,
-- frameworks,
-- technologies used
+- Javascript
+- HTML
+- CSS
 
 ## Live Demo
 
-[Live Demo Link](https://livedemo.com)
+[Live Demo Link](https://mikethreels.github.io/library/)
 
 
 ## Getting Started
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
-
-
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
-
-### Setup
-
-### Install
-
-### Usage
-
-### Run tests
-
-### Deployment
+git clone https://github.com/mikethreels/library
+Open the index.html with your favorite browser
+Explore the website
 
 
 
-## Authors
-
-👤 **Author1**
-
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
-
-👤 **Author2**
-
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
+## Author
+👤 Michael Threels
+- Github: [@mikethreels](https://github.com/mikethreels)
+- Twitter: [@MichaelThreels](https://twitter.com/MichaelThreels)
+- LinkedIn :[michaelthreels](https://www.linkedin.com/in/michael-threels)
 
 ## 🤝 Contributing
 

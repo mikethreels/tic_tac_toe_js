@@ -1,6 +1,7 @@
 body {
-  background-color: #009ee2;
+  background-image: linear-gradient(to right top, #009ee2, #1e93f8, #6981ff, #ab61f9, #e518db);
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  height: 100vh;
 }
 
 header {
@@ -21,8 +22,23 @@ main {
   flex-direction: column;
 }
 
+ul {
+  list-style-type: circle;
+  padding-left: 20px;
+}
+
 .player_select {
   margin: 10px;
+  max-width: 40vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 700;
 }
 
 input {
@@ -44,12 +60,34 @@ input {
   margin: 0 15px 0 0;
 }
 
+.message_section {
+  color: white;
+}
+
+.message_section h3{
+  font-size: 50px;
+  font-weight: 700;
+  margin: 50px;
+}
+
+.message_section div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
 .game_section {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   width: 60vh;
   height: 60vh;
   gap: 10px;
+}
+
+.game_section h2 {
+  grid-column: 1 / -1;
+  color: #703900;
 }
 
 .game_section a {
@@ -66,6 +104,20 @@ input {
   box-shadow: 0 0 0 white;
 }
 
+.game_info {
+  display: block;
+  color: white;
+  margin: 10px;
+}
+
 .none {
   display: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.visible {
+  visibility: visible;
 }

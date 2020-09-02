@@ -19,6 +19,18 @@
 
       </section>
       <section id="player" class="player_select">
+        <h2>Hi players,</h2>
+        <span>
+          welcome to Tic-Tac-Toe, before you start the game let us explain the game-play a little.
+          <ul>
+            <li>The game is played on a grid that's 3 squares by 3 squares.</li>
+            <li>you both get a symbol assigned, see the input box to see which one</li>
+            <li>Players take turns putting their symbols in empty squares.</li>
+            <li>The first player to get 3 of his/her symbols in a row (horizontally, vertically, or diagonally) is the winner.</li>
+            <li>When all squares are full, the game is over. If no player has 3 symbols in a row, the game ends in a tie.</li>
+          </ul>
+          BEFORE YOU START:  please pick your name and symbol you would like to play with.
+        </span>
         <form id="newPlayerForm" class="block">
           <input type="text" name="player1" id="newPlayer1" placeholder="Enter your name player 1 (X)" required>
           <input type="text" name="player2" id="newPlayer2" placeholder="Enter your name player 2 (O)" required>
@@ -28,12 +40,13 @@
       <section id="game" class="none">
 
       </section>
+      <section id="game_info" class="none">
+
+      </section>
     </main>
     <footer>
 
     </footer>
-
-    <script src="game.js"></script>
-    
   </body>
+  <script src="game.js"></script>
 </html>
