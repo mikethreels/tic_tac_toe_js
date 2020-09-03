@@ -2,7 +2,7 @@
 
 > This is a tic-tac-toe game to get familiar with Javascript
 
-![screenshot](./app_screenshot.png)
+![screenshot](./docs/assets/images/app_screenshot.png)
 
 In this application you can play a game of tic-tac-toe against your friends or foe's.
 
