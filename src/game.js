@@ -2,7 +2,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
 
-// module to create board
 const gameBoard = (() => {
   const board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return {
@@ -10,7 +9,6 @@ const gameBoard = (() => {
   };
 })();
 
-// factory to create players
 const Player = (name, symbol) => {
   const getName = () => name;
   const getSymbol = () => symbol;
@@ -18,7 +16,6 @@ const Player = (name, symbol) => {
   return { getName, getSymbol, comb };
 };
 
-// module containing all the game logic
 const gameLogic = (() => {
   let player1;
   let player2;
@@ -34,7 +31,6 @@ const gameLogic = (() => {
     [0, 4, 8],
     [2, 4, 6]];
 
-  // DOM manipulation for when the game ends
   const winner = (player, draw = false) => {
     const message = document.getElementById('message');
     while (message.firstChild) {
@@ -61,14 +57,12 @@ const gameLogic = (() => {
     document.querySelector('button').addEventListener('click', reset);
   };
 
-  // checks if there is a winner
   const winCheck = () => {
     if (winningMoves.some((win) => win.every((r) => currentPlayer.comb.includes(r)))) {
       winner(currentPlayer);
     }
   };
 
-  // checks if this move was already made
   const playerMove = (space, boardSpace) => {
     if (player1.comb.includes(space - 1) || player2.comb.includes(space - 1)) {
       // eslint-disable-next-line no-alert
@@ -79,7 +73,6 @@ const gameLogic = (() => {
     return true;
   };
 
-  // DOM manipulation to view who's turn it is
   const displayTurn = () => {
     const gameInfo = document.getElementById('game_info');
     while (gameInfo.firstChild) {
@@ -90,7 +83,6 @@ const gameLogic = (() => {
     gameInfo.append(turn);
   };
 
-  // checks if it's a draw
   const checkTurns = () => {
     // eslint-disable-next-line max-len
     if (turns === 9 && !winningMoves.some((win) => win.every((r) => currentPlayer.comb.includes(r)))) {
@@ -98,7 +90,6 @@ const gameLogic = (() => {
     }
   };
 
-  // DOM manipulation to display the game
   function render() {
     const game = document.getElementById('game');
     while (game.firstChild) {
@@ -129,7 +120,6 @@ const gameLogic = (() => {
     });
   }
 
-  // changes the visibility for when the form has been filled in
   const switchForm = () => {
     const newPlayerForm = document.getElementById('player');
     if (newPlayerForm.attributes.class.value === 'player_select') {
@@ -141,7 +131,6 @@ const gameLogic = (() => {
     }
   };
 
-  // resets parameters if the player choses to play again
   function reset() {
     gameBoard.board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     player1.comb = [];
@@ -154,9 +143,7 @@ const gameLogic = (() => {
     render();
   }
 
-  // sends player information to the factory
   function gameInit(e) {
-  // prevent the submit button from sending the form
     e.preventDefault();
     const tempplayer1 = document.getElementById('newPlayer1').value;
     const tempplayer2 = document.getElementById('newPlayer2').value;
