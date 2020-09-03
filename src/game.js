@@ -31,6 +31,16 @@ const gameLogic = (() => {
     [0, 4, 8],
     [2, 4, 6]];
 
+  const winnerMessage = (draw, player) => {
+    let winMessage;
+    if (draw === true) {
+      winMessage = "It's a draw!";
+    } else {
+      winMessage = `Congratulation ${player.getName()} you win!`;
+    }
+    return winMessage;
+  };
+
   const winner = (player, draw = false) => {
     const message = document.getElementById('message');
     while (message.firstChild) {
@@ -39,11 +49,8 @@ const gameLogic = (() => {
     const messageContainer = document.createElement('div');
     const messageHeader = document.createElement('h3');
     const messageText = document.createElement('p');
-    if (draw === true) {
-      messageHeader.innerHTML = "It's a draw!";
-    } else {
-      messageHeader.innerHTML = `Congratulation ${player.getName()} you win!`;
-    }
+    const winMessage = winnerMessage(draw, player);
+    messageHeader.innerHTML = winMessage;
     messageText.innerHTML = 'would you like to play again?';
     messageContainer.append(messageHeader);
     messageContainer.append(messageText);
