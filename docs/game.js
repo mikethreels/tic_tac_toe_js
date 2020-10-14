@@ -9,12 +9,15 @@ const gameBoard = (() => {
   };
 })();
 
+
 const Player = (name, symbol) => {
   const getName = () => name;
   const getSymbol = () => symbol;
   const comb = [];
   return { getName, getSymbol, comb };
 };
+  
+
 
 const gameLogic = (() => {
   let player1;
@@ -160,6 +163,12 @@ const gameLogic = (() => {
     switchForm();
     render();
   }
-
-  document.getElementById('newPlayerForm').addEventListener('submit', gameInit);
+  
+ 
+  return { winnerMessage, winner, winCheck, playerMove, displayTurn, checkTurns,
+           render, switchForm, reset, gameInit }
 })();
+
+
+
+export { gameBoard, Player, gameLogic }

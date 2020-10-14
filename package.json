@@ -1,0 +1,32 @@
+{
+  "name": "tic_tac_toe_js",
+  "version": "1.0.0",
+  "description": "> This is a tic-tac-toe game to get familiar with Javascript",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikethreels/tic_tac_toe_js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikethreels/tic_tac_toe_js/issues"
+  },
+  "homepage": "https://github.com/mikethreels/tic_tac_toe_js#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-jest": "^26.5.2",
+    "jest": "^26.5.3",
+    "webpack": "^5.1.0",
+    "webpack-cli": "^4.0.0"
+  }
+}
