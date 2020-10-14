@@ -1,3 +1,4 @@
+import Player from './player';
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
@@ -8,15 +9,6 @@ const gameBoard = (() => {
     board,
   };
 })();
-
-
-const Player = (name, symbol) => {
-  const getName = () => name;
-  const getSymbol = () => symbol;
-  const comb = [];
-  return { getName, getSymbol, comb };
-};
-  
 
 
 const gameLogic = (() => {
@@ -73,11 +65,12 @@ const gameLogic = (() => {
     }
   };
 
-  const playerMove = (space, boardSpace) => {
-    if (player1.comb.includes(space - 1) || player2.comb.includes(space - 1)) {
+  const playerMove = (space, p1, p2) => {
+    console.log(space);
+    if (p1.comb.includes(space - 1) || p2.comb.includes(space - 1)) {
       // eslint-disable-next-line no-alert
-      alert('this position has already been taken chose another');
-      playerMove(boardSpace, space);
+
+      // playerMove(space, player1, player2);
       return false;
     }
     return true;
@@ -114,7 +107,7 @@ const gameLogic = (() => {
       // eslint-disable-next-line func-names
       boardSpace.onclick = () => {
         turns += 1;
-        const check = playerMove(space, boardSpace);
+        const check = playerMove(space, player1, player2);
         if (check) {
           gameBoard.board[space - 1] = currentPlayer.getSymbol();
           boardSpaceText.innerHTML = currentPlayer.getSymbol();
@@ -123,6 +116,8 @@ const gameLogic = (() => {
           checkTurns();
           currentPlayer = currentPlayer === player1 ? player2 : player1;
           displayTurn();
+        } else {
+          alert('this position has already been taken chose another');
         }
       };
       boardSpace.append(boardSpaceText);
@@ -163,12 +158,21 @@ const gameLogic = (() => {
     switchForm();
     render();
   }
-  
- 
-  return { winnerMessage, winner, winCheck, playerMove, displayTurn, checkTurns,
-           render, switchForm, reset, gameInit }
+
+
+  return {
+    winnerMessage,
+    winner,
+    winCheck,
+    playerMove,
+    displayTurn,
+    checkTurns,
+    render,
+    switchForm,
+    reset,
+    gameInit,
+  };
 })();
 
 
-
-export { gameBoard, Player, gameLogic }
+export { gameBoard, gameLogic };
