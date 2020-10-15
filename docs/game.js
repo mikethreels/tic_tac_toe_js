@@ -22,6 +22,10 @@ const gameLogic = (() => {
     [0, 4, 8],
     [2, 4, 6]];
 
+  const getPlayer1 = () => player1;
+  const getPlayer2 = () => player2;
+  const getCurrentPlayer = () => currentPlayer;
+
   const winnerMessage = (draw, player) => {
     let winMessage;
     if (draw === true) {
@@ -42,6 +46,13 @@ const gameLogic = (() => {
 
   const playerMove = (space) => {
     if (player1.comb.includes(space - 1) || player2.comb.includes(space - 1)) {
+      return false;
+    }
+    return true;
+  };
+
+  const playerMove2 = (space, p1, p2) => {
+    if (p1.comb.includes(space - 1) || p2.comb.includes(space - 1)) {
       return false;
     }
     return true;
@@ -105,11 +116,15 @@ const gameLogic = (() => {
     winnerMessage,
     winCheck,
     playerMove,
+    playerMove2,
     switchForm,
     reset,
     gameInit,
     incrementmoves,
     switchPlayer,
+    getPlayer1,
+    getPlayer2,
+    getCurrentPlayer,
   };
 })();
 

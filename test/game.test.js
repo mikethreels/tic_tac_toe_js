@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { gameBoard, gameLogic } from '../docs/game';
+import gameLogic from '../docs/game';
 import Player from '../docs/player';
 
 let spy;
@@ -20,39 +20,92 @@ describe('Game Flow module pattern ', () => {
     player2.comb.push(3, 5);
   });
 
-  test('Player has a name', () => {
-    expect(player1.getName()).toBe('user1');
-    expect(player1.getSymbol()).toBe('X');
-  });
 
-  test('test output if player has won or not', () => {
-    expect(gameLogic.winnerMessage(false, player1)).toBe('Congratulation user1 you win!');
-    expect(gameLogic.winnerMessage(true, player1)).toBe("It's a draw!");
+  describe('Test player information ', () => {
+    test('Player1 has a name', () => {
+      expect(player1.getName()).toBe('user1');
+    });
+
+    test('Player1 has a symbol', () => {
+      expect(player1.getSymbol()).toBe('X');
+    });
+
+    test('Player2 has a name', () => {
+      expect(player2.getName()).toBe('user2');
+    });
+
+    test('Player2 has a symbol', () => {
+      expect(player2.getSymbol()).toBe('O');
+    });
+  });
+  
+
+  describe('Test game outcome display ', () => {
+    test('test output if player1 has won', () => {
+      expect(gameLogic.winnerMessage(false, player1)).toBe('Congratulation user1 you win!');
+    });
+
+    test('test output if player2 has won', () => {
+      expect(gameLogic.winnerMessage(false, player2)).toBe('Congratulation user2 you win!');
+    });
+
+    test('test output if it is a draw', () => {
+      expect(gameLogic.winnerMessage(true, player1)).toBe("It's a draw!");
+    });
   });
 
   test('test if move was already taken', () => {
-    expect(gameLogic.playerMove(5, player1, player2)).toBe(true);
-    expect(gameLogic.playerMove(6, player1, player2)).toBe(false);
+   
+    expect(gameLogic.playerMove2(5, player1, player2)).toBe(true);
+    expect(gameLogic.playerMove2(6, player1, player2)).toBe(false);
   });
 
-  // test('validates and set player move', () => {
-  //   global.currentPlayer = player1;
-  //   console.log(global.currentPlayer);
-  //   const callWinCheck = gameLogic.winCheck;
-  //   const myMockWinCheck = jest.fn(callWinCheck);
-  //   // const mockElement = document.createElement('p');
-  //   const value = gameLogic.checkMove(myMockWinCheck);
-  //   // mockElement.innerHTML = currentPlayer.getSymbol();
-  //   // spy.mockReturnValue(mockElement);
-  //   // mockElement();
-  //   expect(myMockWinCheck).toHaveBeenCalled();
-  // });
-  it.only('calls winCheck', () => {
-    jest.spyOn(gameLogic, 'winCheck');
-    gameLogic.checkMove(true, 0, 0, currentPlayer);
-    expect(gameLogic.winCheck()).toBeCalled();
-  });
+  
 });
+
+describe('Validate user move and if user has won ', () => {
+  let player1;
+  let player2;
+  let currentPlayer;
+  beforeAll(() => {
+    player1 = Player('user1', 'X');
+    player2 = Player('user2', 'O');
+    currentPlayer = player1;
+    player1.comb.push(0, 1, 2);
+    player2.comb.push(3, 5);
+  });
+  
+  describe ('Test if user has won or not', () => {
+    test('test output if player1 has won', () => {
+      expect(gameLogic.winnerMessage(false, player1)).toBe('Congratulation user1 you win!');
+    });
+
+    test('test output if player2 has won', () => {
+      expect(gameLogic.winnerMessage(false, player2)).toBe('Congratulation user2 you win!');
+    });
+
+    test('If it is a draw', () =>{
+      expect(gameLogic.winnerMessage(true, player1)).toBe("It's a draw!");
+    });
+  });
+  
+  describe ('test if move was already taken', () => {
+  
+    test('returns false if move was already made', () => {
+      expect(gameLogic.playerMove2(6, player1, player2)).toBe(false);
+    });
+
+    test('returns true if move was not already made', () => {
+      expect(gameLogic.playerMove2(5, player1, player2)).toBe(true);
+    });
+
+  });
+
+
+});
+
+
+
 
 describe('checkMove', () => {
   const winningPatterns = [

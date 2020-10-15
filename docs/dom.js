@@ -49,7 +49,9 @@ const domManipulation = (() => {
       boardSpaceText.innerHTML = space;
       // eslint-disable-next-line func-names
       boardSpace.onclick = () => {
-        const check = gameLogic.playerMove(space);
+        const p1 = gameLogic.getPlayer1();
+        const p2 = gameLogic.getPlayer2();
+        const check = gameLogic.playerMove2(space, p1, p2);
         checkMove(check, space, boardSpaceText, currentPlayer);
         currentPlayer = gameLogic.switchPlayer();
         displayPlayer(currentPlayer);
