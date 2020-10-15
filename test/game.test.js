@@ -31,19 +31,42 @@ describe('Game Flow module pattern ', () => {
   });
 
   test('test if move was already taken', () => {
-    console.log(player2.comb);
     expect(gameLogic.playerMove(5, player1, player2)).toBe(true);
     expect(gameLogic.playerMove(6, player1, player2)).toBe(false);
   });
 
-  test('validates and set player move', () => {
-    const callWinCheck = winCheck;
-    const myMockWinCheck = jest.fn(callWinCheck);
-    const mockElement = document.createElement('p');
-   
-    mockElement.innerHTML = currentPlayer.getSymbol();
-    spy.mockReturnValue(mockElement);
-    mockElement();
-    expect(mockElement).toHaveBeenCalled();
+  // test('validates and set player move', () => {
+  //   global.currentPlayer = player1;
+  //   console.log(global.currentPlayer);
+  //   const callWinCheck = gameLogic.winCheck;
+  //   const myMockWinCheck = jest.fn(callWinCheck);
+  //   // const mockElement = document.createElement('p');
+  //   const value = gameLogic.checkMove(myMockWinCheck);
+  //   // mockElement.innerHTML = currentPlayer.getSymbol();
+  //   // spy.mockReturnValue(mockElement);
+  //   // mockElement();
+  //   expect(myMockWinCheck).toHaveBeenCalled();
+  // });
+  it.only('calls winCheck', () => {
+    jest.spyOn(gameLogic, 'winCheck');
+    gameLogic.checkMove(true, 0, 0, currentPlayer);
+    expect(gameLogic.winCheck()).toBeCalled();
+  });
+});
+
+describe('checkMove', () => {
+  const winningPatterns = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]];
+
+  test('returns false if there is no winning pattern', () => {
+    const boardArr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    expect(gameLogic);
   });
 });
