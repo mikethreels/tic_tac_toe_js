@@ -2,14 +2,21 @@
 import { gameBoard, gameLogic } from '../docs/game';
 import Player from '../docs/player';
 
+let spy;
+beforeAll(() => {
+  spy = jest.spyOn(document, 'getElementById');
+});
+
 
 describe('Game Flow module pattern ', () => {
   let player1;
   let player2;
+  let currentPlayer;
   beforeAll(() => {
     player1 = Player('user1', 'X');
     player2 = Player('user2', 'O');
-    player1.comb.push(1, 2);
+    currentPlayer = player1;
+    player1.comb.push(0, 1, 2);
     player2.comb.push(3, 5);
   });
 
@@ -27,5 +34,16 @@ describe('Game Flow module pattern ', () => {
     console.log(player2.comb);
     expect(gameLogic.playerMove(5, player1, player2)).toBe(true);
     expect(gameLogic.playerMove(6, player1, player2)).toBe(false);
+  });
+
+  test('validates and set player move', () => {
+    const callWinCheck = winCheck;
+    const myMockWinCheck = jest.fn(callWinCheck);
+    const mockElement = document.createElement('p');
+   
+    mockElement.innerHTML = currentPlayer.getSymbol();
+    spy.mockReturnValue(mockElement);
+    mockElement();
+    expect(mockElement).toHaveBeenCalled();
   });
 });

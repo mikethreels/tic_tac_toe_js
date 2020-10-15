@@ -62,11 +62,12 @@ const gameLogic = (() => {
   const winCheck = () => {
     if (winningMoves.some((win) => win.every((r) => currentPlayer.comb.includes(r)))) {
       winner(currentPlayer);
+    } else if (turns === 9 && !winningMoves.some((win) => win.every((r) => currentPlayer.comb.includes(r)))) {
+      winner('N/A', true);
     }
   };
 
   const playerMove = (space, p1, p2) => {
-    console.log(space);
     if (p1.comb.includes(space - 1) || p2.comb.includes(space - 1)) {
       // eslint-disable-next-line no-alert
 
@@ -93,6 +94,22 @@ const gameLogic = (() => {
     }
   };
 
+  function checkMove(check, space, boardSpaceText) {
+    if (check) {
+      gameBoard.board[space - 1] = currentPlayer.getSymbol();
+      boardSpaceText.innerHTML = currentPlayer.getSymbol();
+      currentPlayer.comb.push(space - 1);
+      winCheck();
+      //checkTurns();
+      currentPlayer = currentPlayer === player1 ? player2 : player1;
+      displayTurn();
+    } else {
+      alert('this position has already been taken chose another');
+    }
+    console.log(boardSpaceText.innerHTML);
+    return boardSpaceText;
+  }
+
   function render() {
     const game = document.getElementById('game');
     while (game.firstChild) {
@@ -108,17 +125,7 @@ const gameLogic = (() => {
       boardSpace.onclick = () => {
         turns += 1;
         const check = playerMove(space, player1, player2);
-        if (check) {
-          gameBoard.board[space - 1] = currentPlayer.getSymbol();
-          boardSpaceText.innerHTML = currentPlayer.getSymbol();
-          currentPlayer.comb.push(space - 1);
-          winCheck();
-          checkTurns();
-          currentPlayer = currentPlayer === player1 ? player2 : player1;
-          displayTurn();
-        } else {
-          alert('this position has already been taken chose another');
-        }
+        checkMove(check, space, boardSpaceText);
       };
       boardSpace.append(boardSpaceText);
       game.append(boardSpace);
@@ -171,6 +178,7 @@ const gameLogic = (() => {
     switchForm,
     reset,
     gameInit,
+    winningMoves,
   };
 })();
 
