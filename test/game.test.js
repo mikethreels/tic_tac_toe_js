@@ -32,7 +32,7 @@ describe('Game Flow module pattern ', () => {
       expect(player2.getSymbol()).toBe('O');
     });
   });
-  
+
   describe('Test game outcome display ', () => {
     test('test output if player1 has won', () => {
       expect(gameLogic.winnerMessage(false, player1)).toBe('Congratulation user1 you win!');
@@ -64,8 +64,8 @@ describe('Validate user move and if user has won ', () => {
     player1.comb.push(0, 1, 2);
     player2.comb.push(3, 5);
   });
-  
-  describe ('Test if user has won or not', () => {
+
+  describe('Test if user has won or not', () => {
     test('test output if player1 has won', () => {
       expect(gameLogic.winnerMessage(false, player1)).toBe('Congratulation user1 you win!');
     });
@@ -74,13 +74,12 @@ describe('Validate user move and if user has won ', () => {
       expect(gameLogic.winnerMessage(false, player2)).toBe('Congratulation user2 you win!');
     });
 
-    test('If it is a draw', () =>{
+    test('If it is a draw', () => {
       expect(gameLogic.winnerMessage(true, player1)).toBe("It's a draw!");
     });
   });
-  
-  describe ('test if move was already taken', () => {
-  
+
+  describe('test if move was already taken', () => {
     test('returns false if move was already made', () => {
       expect(gameLogic.playerMove(6, player1, player2)).toBe(false);
     });
@@ -133,7 +132,6 @@ describe('test drawCheck function', () => {
     spy.mockClear();
   });
   test('calls winner if there is a Draw', () => {
-   
     gameLogic.drawCheck(player2, 9);
     expect(spy).toHaveBeenCalled();
     expect(spy).toHaveBeenCalledTimes(1);
@@ -143,4 +141,3 @@ describe('test drawCheck function', () => {
     expect(spy).toHaveBeenCalledTimes(0);
   });
 });
-

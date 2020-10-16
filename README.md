@@ -36,11 +36,24 @@ You are a symbol you choose, your friend is another symbol he chooses. Players t
 The first player to get n of his/her marks in a row (horizontally, vertically, or diagonally) is the winner.
 When all squares are full, the game is over. If no player has n marks in a row, the game ends in a tie.
 
+## Testing
+
+To run the tests created follow below steps.
+- Run `npm install`
+- Run `npm test`
+
+The user can add test insid the game.test.js file inside the test folder.
+
 ## Author
 👤 Michael Threels
 - Github: [@mikethreels](https://github.com/mikethreels)
 - Twitter: [@MichaelThreels](https://twitter.com/MichaelThreels)
 - LinkedIn :[michaelthreels](https://www.linkedin.com/in/michael-threels)
+
+👤 Carlos Prieto Barron
+- Github: [@carlosprietobarron](https://github.com/carlosprietobarron)
+- LinkedIn: [CarlosPrietoBarron](www.linkedin.com/in/carlosprietobarron)
+
 
 ## 🤝 Contributing
 

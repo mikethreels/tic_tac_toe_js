@@ -5,15 +5,11 @@ import gameBoard from './gameBoard';
 
 const domManipulation = (() => {
   function checkMove(check, space, boardSpaceText, currentPlayer) {
-    console.log(currentPlayer.getSymbol());
     if (check) {
       gameLogic.incrementmoves(space);
       const turn = gameLogic.winCheck(currentPlayer);
       gameLogic.drawCheck(currentPlayer, turn);
       boardSpaceText.innerHTML = currentPlayer.getSymbol();
-      console.log(currentPlayer.getSymbol());
-
-      console.log(currentPlayer.getSymbol());
     } else {
       alert('this position has already been taken chose another');
     }
@@ -31,7 +27,6 @@ const domManipulation = (() => {
   };
 
   function render(currentPlayer) {
-    console.log(currentPlayer.getName());
     const game = document.getElementById('game');
     while (game.firstChild) {
       game.removeChild(game.firstChild);
