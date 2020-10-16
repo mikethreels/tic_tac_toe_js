@@ -8,8 +8,8 @@ const domManipulation = (() => {
     console.log(currentPlayer.getSymbol());
     if (check) {
       gameLogic.incrementmoves(space);
-      gameLogic.winCheck(currentPlayer);
-      gameLogic.drawCheck(currentPlayer);
+      const turn = gameLogic.winCheck(currentPlayer);
+      gameLogic.drawCheck(currentPlayer, turn);
       boardSpaceText.innerHTML = currentPlayer.getSymbol();
       console.log(currentPlayer.getSymbol());
 

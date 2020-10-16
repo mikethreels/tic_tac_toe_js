@@ -132,13 +132,15 @@ describe('test drawCheck function', () => {
   afterEach(() => {
     spy.mockClear();
   });
-  test('calls winner if there is a winning pattern', () => {
-    gameLogic.drawCheck(currentPlayer);
+  test('calls winner if there is a Draw', () => {
+   
+    gameLogic.drawCheck(player2, 9);
     expect(spy).toHaveBeenCalled();
     expect(spy).toHaveBeenCalledTimes(1);
   });
-  test("doesn't run winner if there is no winning pattern", () => {
+  test("doesn't run winner if there is no Draw", () => {
     gameLogic.drawCheck(player2);
     expect(spy).toHaveBeenCalledTimes(0);
   });
 });
+

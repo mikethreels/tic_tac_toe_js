@@ -41,10 +41,12 @@ const gameLogic = (() => {
     if (winningMoves.some((win) => win.every((r) => curPlayer.comb.includes(r)))) {
       domManipulation.winner(curPlayer);
     } 
+    return turns;
   };
 
-  const drawCheck = (curPlayer) => {
-    if (turns === 9 && !winningMoves.some((win) => win.every((r) => curPlayer.comb.includes(r)))) {
+  const drawCheck = (curPlayer, turn) => {
+    console.log("turns", turns);
+    if (turn === 9 && !winningMoves.some((win) => win.every((r) => curPlayer.comb.includes(r)))) {
       domManipulation.winner('N/A', true);
     }
   };
