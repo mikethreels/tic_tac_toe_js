@@ -103,7 +103,7 @@ describe('test winCheck function', () => {
     player1.comb.push(0, 1, 2);
     player2.comb.push(3, 5);
   });
-  beforeEach(() => {
+  afterEach(() => {
     spy.mockClear();
   });
   test('calls winner if there is a winning pattern', () => {
@@ -129,7 +129,7 @@ describe('test drawCheck function', () => {
     player1.comb.push(0, 1, 2);
     player2.comb.push(3, 5);
   });
-  beforeEach(() => {
+  afterEach(() => {
     spy.mockClear();
   });
   test('calls winner if there is a winning pattern', () => {

@@ -37,6 +37,7 @@ const gameLogic = (() => {
   };
 
   const winCheck = (curPlayer) => {
+    console.log(curPlayer.getName() + "inside winCheck")
     if (winningMoves.some((win) => win.every((r) => curPlayer.comb.includes(r)))) {
       domManipulation.winner(curPlayer);
     } 
