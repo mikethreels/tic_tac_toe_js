@@ -3,7 +3,7 @@ import gameLogic from '../docs/game';
 import Player from '../docs/player';
 import domManipulation from '../docs/dom';
 
-describe('Game Flow module pattern ', () => {
+describe('test ', () => {
   let player1;
   let player2;
   let currentPlayer;
@@ -13,24 +13,6 @@ describe('Game Flow module pattern ', () => {
     currentPlayer = player1;
     player1.comb.push(0, 1, 2);
     player2.comb.push(3, 5);
-  });
-
-  describe('Test player information ', () => {
-    test('Player1 has a name', () => {
-      expect(player1.getName()).toBe('user1');
-    });
-
-    test('Player1 has a symbol', () => {
-      expect(player1.getSymbol()).toBe('X');
-    });
-
-    test('Player2 has a name', () => {
-      expect(player2.getName()).toBe('user2');
-    });
-
-    test('Player2 has a symbol', () => {
-      expect(player2.getSymbol()).toBe('O');
-    });
   });
 
   describe('Test game outcome display ', () => {

@@ -49,7 +49,9 @@ const domManipulation = (() => {
         const p2 = gameLogic.getPlayer2();
         const check = gameLogic.playerMove(space, p1, p2);
         checkMove(check, space, boardSpaceText, currentPlayer);
-        currentPlayer = gameLogic.switchPlayer();
+        if (check) {
+          currentPlayer = gameLogic.switchPlayer();
+        }
         displayPlayer(currentPlayer);
       };
       boardSpace.append(boardSpaceText);
