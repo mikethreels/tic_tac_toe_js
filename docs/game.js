@@ -36,37 +36,26 @@ const gameLogic = (() => {
     return winMessage;
   };
 
-  const winCheck = () => {
-    if (winningMoves.some((win) => win.every((r) => currentPlayer.comb.includes(r)))) {
-      domManipulation.winner(currentPlayer);
-    } else if (turns === 9 && !winningMoves.some((win) => win.every((r) => currentPlayer.comb.includes(r)))) {
+  const winCheck = (curPlayer) => {
+    if (winningMoves.some((win) => win.every((r) => curPlayer.comb.includes(r)))) {
+      domManipulation.winner(curPlayer);
+    } 
+  };
+
+  const drawCheck = (curPlayer) => {
+    if (turns === 9 && !winningMoves.some((win) => win.every((r) => curPlayer.comb.includes(r)))) {
       domManipulation.winner('N/A', true);
     }
   };
 
-  const playerMove = (space) => {
-    if (player1.comb.includes(space - 1) || player2.comb.includes(space - 1)) {
-      return false;
-    }
-    return true;
-  };
-
-  const playerMove2 = (space, p1, p2) => {
+  const playerMove = (space, p1, p2) => {
     if (p1.comb.includes(space - 1) || p2.comb.includes(space - 1)) {
       return false;
     }
     return true;
   };
 
-  // const checkTurns = () => {
-  //   // eslint-disable-next-line max-len
-  //   if (turns === 9 && !winningMoves.some((win) => win.every((r) => currentPlayer.comb.includes(r)))) {
-  //     winner('N/A', true);
-  //   }
-  // };
-
   const switchPlayer = () => {
-    // console.log(currentPlayer.getName());
     currentPlayer = currentPlayer === player1 ? player2 : player1;
     return currentPlayer;
   };
@@ -116,7 +105,6 @@ const gameLogic = (() => {
     winnerMessage,
     winCheck,
     playerMove,
-    playerMove2,
     switchForm,
     reset,
     gameInit,
@@ -125,6 +113,7 @@ const gameLogic = (() => {
     getPlayer1,
     getPlayer2,
     getCurrentPlayer,
+    drawCheck,
   };
 })();
 

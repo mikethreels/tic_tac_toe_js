@@ -8,7 +8,8 @@ const domManipulation = (() => {
     console.log(currentPlayer.getSymbol());
     if (check) {
       gameLogic.incrementmoves(space);
-      gameLogic.winCheck();
+      gameLogic.winCheck(currentPlayer);
+      gameLogic.drawCheck(currentPlayer);
       boardSpaceText.innerHTML = currentPlayer.getSymbol();
       console.log(currentPlayer.getSymbol());
 
@@ -51,7 +52,7 @@ const domManipulation = (() => {
       boardSpace.onclick = () => {
         const p1 = gameLogic.getPlayer1();
         const p2 = gameLogic.getPlayer2();
-        const check = gameLogic.playerMove2(space, p1, p2);
+        const check = gameLogic.playerMove(space, p1, p2);
         checkMove(check, space, boardSpaceText, currentPlayer);
         currentPlayer = gameLogic.switchPlayer();
         displayPlayer(currentPlayer);

@@ -1,12 +1,7 @@
 /* eslint-disable no-unused-vars */
 import gameLogic from '../docs/game';
 import Player from '../docs/player';
-
-let spy;
-beforeAll(() => {
-  spy = jest.spyOn(document, 'getElementById');
-});
-
+import domManipulation from '../docs/dom';
 
 describe('Game Flow module pattern ', () => {
   let player1;
@@ -19,7 +14,6 @@ describe('Game Flow module pattern ', () => {
     player1.comb.push(0, 1, 2);
     player2.comb.push(3, 5);
   });
-
 
   describe('Test player information ', () => {
     test('Player1 has a name', () => {
@@ -39,7 +33,6 @@ describe('Game Flow module pattern ', () => {
     });
   });
   
-
   describe('Test game outcome display ', () => {
     test('test output if player1 has won', () => {
       expect(gameLogic.winnerMessage(false, player1)).toBe('Congratulation user1 you win!');
@@ -55,12 +48,9 @@ describe('Game Flow module pattern ', () => {
   });
 
   test('test if move was already taken', () => {
-   
-    expect(gameLogic.playerMove2(5, player1, player2)).toBe(true);
-    expect(gameLogic.playerMove2(6, player1, player2)).toBe(false);
+    expect(gameLogic.playerMove(5, player1, player2)).toBe(true);
+    expect(gameLogic.playerMove(6, player1, player2)).toBe(false);
   });
-
-  
 });
 
 describe('Validate user move and if user has won ', () => {
@@ -92,34 +82,63 @@ describe('Validate user move and if user has won ', () => {
   describe ('test if move was already taken', () => {
   
     test('returns false if move was already made', () => {
-      expect(gameLogic.playerMove2(6, player1, player2)).toBe(false);
+      expect(gameLogic.playerMove(6, player1, player2)).toBe(false);
     });
 
     test('returns true if move was not already made', () => {
-      expect(gameLogic.playerMove2(5, player1, player2)).toBe(true);
+      expect(gameLogic.playerMove(5, player1, player2)).toBe(true);
     });
-
   });
-
-
 });
 
+describe('test winCheck function', () => {
+  let player1;
+  let player2;
+  let currentPlayer;
+  const spy = jest.spyOn(domManipulation, 'winner').mockImplementation(() => true);
+  beforeAll(() => {
+    player1 = Player('user1', 'X');
+    player2 = Player('user2', 'O');
+    currentPlayer = player1;
+    player1.comb.push(0, 1, 2);
+    player2.comb.push(3, 5);
+  });
+  beforeEach(() => {
+    spy.mockClear();
+  });
+  test('calls winner if there is a winning pattern', () => {
+    gameLogic.winCheck(currentPlayer);
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+  test("doesn't run winner if there is no winning pattern", () => {
+    gameLogic.winCheck(player2);
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+});
 
-
-
-describe('checkMove', () => {
-  const winningPatterns = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]];
-
-  test('returns false if there is no winning pattern', () => {
-    const boardArr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    expect(gameLogic);
+describe('test drawCheck function', () => {
+  let player1;
+  let player2;
+  let currentPlayer;
+  const spy = jest.spyOn(domManipulation, 'winner').mockImplementation(() => true);
+  beforeAll(() => {
+    player1 = Player('user1', 'X');
+    player2 = Player('user2', 'O');
+    currentPlayer = player1;
+    player1.comb.push(0, 1, 2);
+    player2.comb.push(3, 5);
+  });
+  beforeEach(() => {
+    spy.mockClear();
+  });
+  test('calls winner if there is a winning pattern', () => {
+    gameLogic.drawCheck(currentPlayer);
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+  test("doesn't run winner if there is no winning pattern", () => {
+    gameLogic.drawCheck(player2);
+    expect(spy).toHaveBeenCalledTimes(0);
   });
 });
