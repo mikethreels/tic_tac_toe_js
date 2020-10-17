@@ -1,20 +1,11 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable max-len */
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
-
-const gameBoard = (() => {
-  const board = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  return {
-    board,
-  };
-})();
-
-const Player = (name, symbol) => {
-  const getName = () => name;
-  const getSymbol = () => symbol;
-  const comb = [];
-  return { getName, getSymbol, comb };
-};
+import Player from './player';
+import domManipulation from './dom';
+import gameBoard from './gameBoard';
 
 const gameLogic = (() => {
   let player1;
@@ -31,6 +22,10 @@ const gameLogic = (() => {
     [0, 4, 8],
     [2, 4, 6]];
 
+  const getPlayer1 = () => player1;
+  const getPlayer2 = () => player2;
+  const getCurrentPlayer = () => currentPlayer;
+
   const winnerMessage = (draw, player) => {
     let winMessage;
     if (draw === true) {
@@ -41,91 +36,36 @@ const gameLogic = (() => {
     return winMessage;
   };
 
-  const winner = (player, draw = false) => {
-    const message = document.getElementById('message');
-    while (message.firstChild) {
-      message.removeChild(message.firstChild);
+  const winCheck = (curPlayer) => {
+    if (winningMoves.some((win) => win.every((r) => curPlayer.comb.includes(r)))) {
+      domManipulation.winner(curPlayer);
     }
-    const messageContainer = document.createElement('div');
-    const messageHeader = document.createElement('h3');
-    const messageText = document.createElement('p');
-    const winMessage = winnerMessage(draw, player);
-    messageHeader.innerHTML = winMessage;
-    messageText.innerHTML = 'would you like to play again?';
-    messageContainer.append(messageHeader);
-    messageContainer.append(messageText);
-    const buttonDiv = document.createElement('div');
-    buttonDiv.innerHTML = '<button id="reset_button">Play again!</button>';
-    message.append(messageContainer);
-    message.append(buttonDiv);
-    message.attributes.class.value = 'message_section';
-    game.attributes.class.value = 'none';
-    game_info.attributes.class.value = 'none';
-    document.querySelector('button').addEventListener('click', reset);
+    return turns;
   };
 
-  const winCheck = () => {
-    if (winningMoves.some((win) => win.every((r) => currentPlayer.comb.includes(r)))) {
-      winner(currentPlayer);
+  const drawCheck = (curPlayer, turn) => {
+    if (turn === 9 && !winningMoves.some((win) => win.every((r) => curPlayer.comb.includes(r)))) {
+      domManipulation.winner('N/A', true);
     }
   };
 
-  const playerMove = (space, boardSpace) => {
-    if (player1.comb.includes(space - 1) || player2.comb.includes(space - 1)) {
-      // eslint-disable-next-line no-alert
-      alert('this position has already been taken chose another');
-      playerMove(boardSpace, space);
+  const playerMove = (space, p1, p2) => {
+    if (p1.comb.includes(space - 1) || p2.comb.includes(space - 1)) {
       return false;
     }
     return true;
   };
 
-  const displayTurn = () => {
-    const gameInfo = document.getElementById('game_info');
-    while (gameInfo.firstChild) {
-      gameInfo.removeChild(gameInfo.firstChild);
-    }
-    const turn = document.createElement('div');
-    turn.innerHTML = `<h2>${currentPlayer.getName()} it's your turn!</h2>`;
-    gameInfo.append(turn);
+  const switchPlayer = () => {
+    currentPlayer = currentPlayer === player1 ? player2 : player1;
+    return currentPlayer;
   };
 
-  const checkTurns = () => {
-    // eslint-disable-next-line max-len
-    if (turns === 9 && !winningMoves.some((win) => win.every((r) => currentPlayer.comb.includes(r)))) {
-      winner('N/A', true);
-    }
+  const incrementmoves = (space) => {
+    turns += 1;
+    gameBoard.board[space - 1] = currentPlayer.getSymbol();
+    currentPlayer.comb.push(space - 1);
   };
-
-  function render() {
-    const game = document.getElementById('game');
-    while (game.firstChild) {
-      game.removeChild(game.firstChild);
-    }
-    displayTurn();
-    const boardArr = gameBoard.board;
-    boardArr.forEach(space => {
-      const boardSpace = document.createElement('a');
-      const boardSpaceText = document.createElement('p');
-      boardSpaceText.innerHTML = space;
-      // eslint-disable-next-line func-names
-      boardSpace.onclick = () => {
-        turns += 1;
-        const check = playerMove(space, boardSpace);
-        if (check) {
-          gameBoard.board[space - 1] = currentPlayer.getSymbol();
-          boardSpaceText.innerHTML = currentPlayer.getSymbol();
-          currentPlayer.comb.push(space - 1);
-          winCheck();
-          checkTurns();
-          currentPlayer = currentPlayer === player1 ? player2 : player1;
-          displayTurn();
-        }
-      };
-      boardSpace.append(boardSpaceText);
-      game.append(boardSpace);
-    });
-  }
 
   const switchForm = () => {
     const newPlayerForm = document.getElementById('player');
@@ -147,7 +87,7 @@ const gameLogic = (() => {
     game_info.attributes.class.value = 'game_info';
     message.attributes.class.value = 'none';
     currentPlayer = player1;
-    render();
+    domManipulation.render(currentPlayer, player1, player2);
   }
 
   function gameInit(e) {
@@ -158,8 +98,25 @@ const gameLogic = (() => {
     player2 = Player(tempplayer2, 'O');
     currentPlayer = player1;
     switchForm();
-    render();
+    domManipulation.render(currentPlayer, player1, player2);
   }
 
-  document.getElementById('newPlayerForm').addEventListener('submit', gameInit);
+
+  return {
+    winnerMessage,
+    winCheck,
+    playerMove,
+    switchForm,
+    reset,
+    gameInit,
+    incrementmoves,
+    switchPlayer,
+    getPlayer1,
+    getPlayer2,
+    getCurrentPlayer,
+    drawCheck,
+  };
 })();
+
+
+export default gameLogic;
